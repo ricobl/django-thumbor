@@ -13,8 +13,10 @@ def _remove_prefix(url, prefix):
         return url[len(prefix):]
     return url
 
+
 def _remove_schema(url):
     return _remove_prefix(url, 'http://')
+
 
 def _prepend_media_url(url):
     if url.startswith(settings.MEDIA_URL):
@@ -22,6 +24,7 @@ def _prepend_media_url(url):
         url.lstrip('/')
         return '%s/%s' % (conf.THUMBOR_MEDIA_URL, url)
     return url
+
 
 def generate_url(image_url, **kwargs):
     image_url = _prepend_media_url(image_url)
