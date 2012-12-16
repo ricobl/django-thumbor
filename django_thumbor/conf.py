@@ -14,4 +14,4 @@ THUMBOR_MEDIA_URL = getattr(settings, 'THUMBOR_MEDIA_URL',
 # The same security key used in the thumbor service to
 # match the URL construction
 THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY',
-                               'my-security-key')
+                               'MY_SECURE_KEY')

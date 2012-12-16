@@ -60,4 +60,4 @@ Here are the default settings that you can override:
 
     # The same security key used in the thumbor service to
     # match the URL construction
-    THUMBOR_SECURITY_KEY = 'my-security-key'
+    THUMBOR_SECURITY_KEY = 'MY_SECURE_KEY'
