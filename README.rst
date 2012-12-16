@@ -16,16 +16,14 @@ On templates:
 .. code-block:: html
 
     {% load thumbor_tags %}
-    {% thumbor_url "/media/uploads/image.jpg" width=300 %}
+    <img src="{% thumbor_url '/media/image.jpg' width=300 %}" width="300" />
 
 On code:
 
 .. code-block:: python
 
-    ```
     from django_thumbor import generate_url
-    resized = generate_url("/media/uploads/image.jpg", width=300)
-    ```
+    resized = generate_url("/media/image.jpg", width=300)
 
 
 Installation
