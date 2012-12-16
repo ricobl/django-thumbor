@@ -49,7 +49,6 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'django_thumbor',
-    'testapp',
     'django_nose',
 )
 
