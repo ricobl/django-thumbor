@@ -39,11 +39,12 @@ Installation
 Configuration
 -------------
 
-Add the app to the ``INSTALLED_APPS`` and the optional settings:
+Add the app to the ``INSTALLED_APPS``:
 
 .. code-block:: python
 
     INSTALLED_APPS = (
+        # ...
         'django_thumbor',
     )
 
