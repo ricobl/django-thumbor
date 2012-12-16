@@ -28,9 +28,27 @@ class TestGenerateURL(TestCase):
 
     def test_should_return_the_result(self):
         encrypted_url = 'encrypted-url.jpg'
+        encrypted_url_with_host = 'http://localhost:8888/encrypted-url.jpg'
 
         with patch('django_thumbor.crypto.generate') as mock:
             mock.return_value = encrypted_url
             url = generate_url(self.url)
 
-        self.assertEqual(url, encrypted_url)
+        self.assertEqual(url, encrypted_url_with_host)
+
+
+class TestURLFixing(TestCase):
+
+    def test_should_prepend_the_domain_to_media_url_images(self):
+        original = '/media/uploads/image.jpg'
+        expected = 'localhost:8000/media/uploads/image.jpg'
+        with patch('django_thumbor.crypto.generate') as mock:
+            url = generate_url(original)
+            mock.assert_called_with(image_url=expected)
+
+    def test_should_remove_the_scheme_from_external_images(self):
+        original = 'http://some.domain.com/path/image.jpg'
+        expected = 'some.domain.com/path/image.jpg'
+        with patch('django_thumbor.crypto.generate') as mock:
+            url = generate_url(original)
+            mock.assert_called_with(image_url=expected)
