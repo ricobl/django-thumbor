@@ -1,0 +1,12 @@
+language: python
+
+python:
+  - 2.7
+
+env:
+  - DJANGO_VERSION=1.4.2
+
+install:
+  - "make install"
+
+script: make test
