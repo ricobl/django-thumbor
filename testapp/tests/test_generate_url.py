@@ -2,14 +2,11 @@
 
 from mock import patch
 from unittest import TestCase
-from django_thumbor import generate_url, crypto
+from django_thumbor import generate_url
 
-from mock import patch
-from unittest import TestCase
-from django_thumbor import crypto
 
 class TestGenerateURL(TestCase):
-    
+
     url = 'domain.com/path/image.jpg'
 
     def assertPassesArgsToCrypto(self, *args, **kwargs):
@@ -26,7 +23,8 @@ class TestGenerateURL(TestCase):
         self.assertPassesArgsToCrypto(image_url=self.url)
 
     def test_should_pass_extra_kwargs_to_crypto(self):
-        self.assertPassesArgsToCrypto(image_url=self.url, width=300, height=200)
+        self.assertPassesArgsToCrypto(
+            image_url=self.url, width=300, height=200)
 
     def test_should_return_the_result(self):
         encrypted_url = 'encrypted-url.jpg'
