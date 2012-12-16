@@ -1,6 +1,8 @@
 django-thumbor
 ==============
 
+.. image:: https://travis-ci.org/ricobl/django-thumbor.png?branch=master
+
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
 
