@@ -7,7 +7,7 @@ A django application to resize images using the
 Usage
 -----
 
-Both `thumbor_url` templatetag and the `generate_url` helper uses the same
+Both ``thumbor_url`` templatetag and the ``generate_url`` helper uses the same
 arguments as `libthumbor <https://github.com/heynemann/libthumbor>`_, you can
 check the `wiki <https://github.com/heynemann/libthumbor/wiki>`_ for more info.
 
@@ -37,7 +37,7 @@ Installation
 Configuration
 -------------
 
-Add the app to the INSTALLED_APPS and the optional settings:
+Add the app to the ``INSTALLED_APPS`` and the optional settings:
 
 .. code-block:: python
 
