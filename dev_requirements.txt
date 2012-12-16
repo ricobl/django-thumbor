@@ -1,0 +1,4 @@
+-e .
+django-nose
+mock
+rednose

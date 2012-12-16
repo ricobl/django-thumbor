@@ -2,3 +2,5 @@
 *~
 *.swp
 ?humbs.db
+dist/
+django_thumbor.egg-info/
