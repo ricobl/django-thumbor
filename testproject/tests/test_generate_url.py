@@ -39,16 +39,15 @@ class TestGenerateURL(TestCase):
 
 class TestURLFixing(TestCase):
 
-    def test_should_prepend_the_domain_to_media_url_images(self):
-        original = '/media/uploads/image.jpg'
-        expected = 'localhost:8000/media/uploads/image.jpg'
+    def assertURLEquals(self, original, expected):
         with patch('django_thumbor.crypto.generate') as mock:
-            url = generate_url(original)
+            generate_url(original)
             mock.assert_called_with(image_url=expected)
 
+    def test_should_prepend_the_domain_to_media_url_images(self):
+        self.assertURLEquals('/media/uploads/image.jpg',
+                             'localhost:8000/media/uploads/image.jpg')
+
     def test_should_remove_the_scheme_from_external_images(self):
-        original = 'http://some.domain.com/path/image.jpg'
-        expected = 'some.domain.com/path/image.jpg'
-        with patch('django_thumbor.crypto.generate') as mock:
-            url = generate_url(original)
-            mock.assert_called_with(image_url=expected)
+        self.assertURLEquals('http://some.domain.com/path/image.jpg',
+                             'some.domain.com/path/image.jpg')
