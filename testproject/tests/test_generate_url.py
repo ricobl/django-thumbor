@@ -63,3 +63,7 @@ class TestThumborArguments(TestCase):
         url = generate_url(self.url, smart=True).split('/')
         self.assertTrue('smart' in url)
 
+    @override_settings(THUMBOR_ARGUMENTS={'smart': True})
+    def test_get_argumentes_settings(self):
+        url = generate_url(self.url).split('/')
+        self.assertTrue('smart' in url)
