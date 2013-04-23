@@ -62,3 +62,27 @@ Here are the default settings that you can override:
     # The same security key used in the thumbor service to
     # match the URL construction
     THUMBOR_SECURITY_KEY = 'MY_SECURE_KEY'
+
+
+Contributing
+------------
+
+Install
+.......
+
+Fork, clone, create a virtualenv and run:
+
+.. code-block:: bash
+
+    git clone git://github.com/ricobl/django-thumbor.git
+    mkvirtualenv django-thumbor
+    make install
+
+Test
+....
+
+Add tests on ``testproject/tests``, add code and run:
+
+.. code-block:: bash
+
+    make test
