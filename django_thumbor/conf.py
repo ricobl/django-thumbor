@@ -15,3 +15,5 @@ THUMBOR_MEDIA_URL = getattr(settings, 'THUMBOR_MEDIA_URL',
 # match the URL construction
 THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY',
                                'MY_SECURE_KEY')
+
+THUMBOR_ARGUMENTS = getattr(settings, 'THUMBOR_ARGUMENTS', {})
