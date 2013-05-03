@@ -3,6 +3,8 @@
 from mock import patch
 from unittest import TestCase
 from django.template import Template, Context
+from django.test.utils import override_settings
+from django_thumbor import conf
 
 
 class TestThumborURLTTagMock(TestCase):
@@ -15,12 +17,24 @@ class TestThumborURLTTagMock(TestCase):
         rendered = template.render(Context({'url': self.url}))
         return rendered.strip()
 
+    @override_settings(THUMBOR_ARGUMENTS={})
     def test_should_pass_the_image_url_arg_to_the_helper(self):
+        reload(conf)
         with patch(self.generate_url_path) as mock:
             self.render('url')
             mock.assert_called_with(image_url=self.url)
 
+    @override_settings(THUMBOR_ARGUMENTS={})
     def test_should_pass_kwargs_to_the_helper(self):
+        reload(conf)
         with patch(self.generate_url_path) as mock:
             self.render('url width=300 height=200')
             mock.assert_called_with(image_url=self.url, width=300, height=200)
+
+    @override_settings(THUMBOR_ARGUMENTS={'smart': True})
+    def test_set_smart_on_default_arguments(self):
+        reload(conf)
+        with patch(self.generate_url_path) as mock:
+            print self.render('url width=300 height=200')
+            mock.assert_called_with(image_url=self.url, width=300,
+                                    height=200, smart=True)
