@@ -2,9 +2,7 @@
 
 from mock import patch
 from unittest import TestCase
-from django_thumbor import generate_url, conf
-from django.test.utils import override_settings
-from django.conf import settings
+from django_thumbor import generate_url
 
 
 class TestGenerateURL(TestCase):
@@ -53,17 +51,3 @@ class TestURLFixing(TestCase):
     def test_should_remove_the_scheme_from_external_images(self):
         self.assertURLEquals('http://some.domain.com/path/image.jpg',
                              'some.domain.com/path/image.jpg')
-
-
-class TestThumborArguments(TestCase):
-
-    url = 'domain.com/path/image.jpg'
-
-    def test_smart_mode_on(self):
-        url = generate_url(self.url, smart=True).split('/')
-        self.assertTrue('smart' in url)
-
-    @override_settings(THUMBOR_ARGUMENTS={'smart': True})
-    def test_get_argumentes_settings(self):
-        url = generate_url(self.url).split('/')
-        self.assertTrue('smart' in url)
