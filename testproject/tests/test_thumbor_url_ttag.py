@@ -38,3 +38,10 @@ class TestThumborURLTTagMock(TestCase):
             print self.render('url width=300 height=200')
             mock.assert_called_with(image_url=self.url, width=300,
                                     height=200, smart=True)
+
+    @override_settings(THUMBOR_ARGUMENTS={'width': 400})
+    def test_set_width_400_on_defalt_arguments_and_300_in_templatetag(self):
+        reload(conf)
+        with patch(self.generate_url_path) as mock:
+            print self.render('url width=300 height=200')
+            mock.assert_called_with(image_url=self.url, width=300, height=200)
