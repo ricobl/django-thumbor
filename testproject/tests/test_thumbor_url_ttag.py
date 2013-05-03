@@ -45,3 +45,10 @@ class TestThumborURLTTagMock(TestCase):
         with patch(self.generate_url_path) as mock:
             print self.render('url width=300 height=200')
             mock.assert_called_with(image_url=self.url, width=300, height=200)
+
+    @override_settings(THUMBOR_ARGUMENTS={'width': 300, 'nose': 40})
+    def test_set_more_than_one_attribute_on_defalt_arguments(self):
+        reload(conf)
+        with patch(self.generate_url_path) as mock:
+            print self.render('url')
+            mock.assert_called_with(image_url=self.url, width=300, nose=40)
