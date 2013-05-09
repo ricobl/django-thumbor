@@ -2,6 +2,13 @@ django-thumbor
 ==============
 
 .. image:: https://travis-ci.org/ricobl/django-thumbor.png?branch=master
+    :target: https://travis-ci.org/ricobl/django-thumbor
+    :alt: CI status on Travis CI
+
+.. image:: https://pypip.in/v/django-thumbor/badge.png
+    :target: https://crate.io/packages/django-thumbor/
+    :alt: Latest django-thumbor PyPI version
+
 
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
