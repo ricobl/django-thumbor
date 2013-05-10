@@ -9,6 +9,9 @@ django-thumbor
     :target: https://crate.io/packages/django-thumbor/
     :alt: Latest django-thumbor PyPI version
 
+.. image:: https://pypip.in/d/django-thumbor/badge.png
+    :target: https://crate.io/packages/django-thumbor/
+    :alt: Number of downloads for django-thumbor on PyPI
 
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
