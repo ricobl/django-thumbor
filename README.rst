@@ -13,6 +13,10 @@ django-thumbor
     :target: https://crate.io/packages/django-thumbor/
     :alt: Number of downloads for django-thumbor on PyPI
 
+.. image:: https://codeq.io/github/ricobl/django-thumbor/badges/master.png
+    :target: https://codeq.io/github/ricobl/django-thumbor/branches/master
+    :alt: Quality score on Codeq
+
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
 
