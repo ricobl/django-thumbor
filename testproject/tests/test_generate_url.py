@@ -2,12 +2,16 @@
 
 from mock import patch
 from unittest import TestCase
-from django_thumbor import generate_url
-
+from django.test.utils import override_settings
+from django_thumbor import generate_url, conf
 
 class TestGenerateURL(TestCase):
 
     url = 'domain.com/path/image.jpg'
+
+    def tearDown(self):
+        # Restore changed settings
+        reload(conf)
 
     def assertPassesArgsToCrypto(self, *args, **kwargs):
         with patch('django_thumbor.crypto.generate') as mock:
@@ -35,6 +39,20 @@ class TestGenerateURL(TestCase):
             url = generate_url(self.url)
 
         self.assertEqual(url, encrypted_url_with_host)
+
+    @override_settings(THUMBOR_ARGUMENTS={'smart': True, 'fit_in': True})
+    def test_should_pass_args_from_settings_to_crypto(self):
+        reload(conf)
+        with patch('django_thumbor.crypto.generate') as mock:
+            generate_url(image_url=self.url)
+            mock.assert_called_with(image_url=self.url, smart=True, fit_in=True)
+
+    @override_settings(THUMBOR_ARGUMENTS={'smart': True})
+    def test_should_allow_overriding_args_from_settings(self):
+        reload(conf)
+        with patch('django_thumbor.crypto.generate') as mock:
+            generate_url(image_url=self.url, smart=False)
+            mock.assert_called_with(image_url=self.url, smart=False)
 
 
 class TestURLFixing(TestCase):
