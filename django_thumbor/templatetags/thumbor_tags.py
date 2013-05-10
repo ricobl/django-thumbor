@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django import template
-from django_thumbor import conf
 from django_thumbor import generate_url
 
 register = template.Library()
@@ -9,5 +8,4 @@ register = template.Library()
 
 @register.simple_tag
 def thumbor_url(image_url, **kwargs):
-    return generate_url(image_url=image_url, **dict(conf.THUMBOR_ARGUMENTS,
-                                                    **kwargs))
+    return generate_url(image_url=image_url, **kwargs)
