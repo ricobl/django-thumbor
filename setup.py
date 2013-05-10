@@ -6,7 +6,8 @@ from setuptools import setup
 setup(
     name='django-thumbor',
     version='0.3',
-    description='A django application to resize images using the thumbor service',
+    description=(
+        'A django application to resize images using the thumbor service'),
     long_description=open('README.rst').read(),
     author=u'Enrico Batista da Luz',
     author_email='rico.bl@gmail.com',

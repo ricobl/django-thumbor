@@ -5,6 +5,7 @@ from unittest import TestCase
 from django.test.utils import override_settings
 from django_thumbor import generate_url, conf
 
+
 class TestGenerateURL(TestCase):
 
     url = 'domain.com/path/image.jpg'
@@ -45,7 +46,8 @@ class TestGenerateURL(TestCase):
         reload(conf)
         with patch('django_thumbor.crypto.generate') as mock:
             generate_url(image_url=self.url)
-            mock.assert_called_with(image_url=self.url, smart=True, fit_in=True)
+            mock.assert_called_with(
+                image_url=self.url, smart=True, fit_in=True)
 
     @override_settings(THUMBOR_ARGUMENTS={'smart': True})
     def test_should_allow_overriding_args_from_settings(self):
