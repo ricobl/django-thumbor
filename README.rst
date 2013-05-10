@@ -70,6 +70,10 @@ Here are the default settings that you can override:
     # match the URL construction
     THUMBOR_SECURITY_KEY = 'MY_SECURE_KEY'
 
+    # Default arguments passed to the `generate_url` helper or
+    # the `thumbor_url` templatetag
+    THUMBOR_ARGUMENTS = {}
+
 
 Contributing
 ------------
