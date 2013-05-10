@@ -9,4 +9,7 @@ env:
 install:
   - "make install"
 
-script: make test
+script: coverage run --source=django_thumbor manage.py test
+
+after_success:
+    coveralls

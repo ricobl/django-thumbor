@@ -2,3 +2,5 @@
 django-nose
 mock
 rednose
+coverage
+coveralls
