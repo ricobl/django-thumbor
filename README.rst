@@ -17,6 +17,11 @@ django-thumbor
     :target: https://codeq.io/github/ricobl/django-thumbor/branches/master
     :alt: Quality score on Codeq
 
+.. image:: https://coveralls.io/repos/ricobl/django-thumbor/badge.png?branch=master
+    :target: https://coveralls.io/r/ricobl/django-thumbor?branch=master
+    :alt: Code coverage on Coveralls
+
+
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
 
