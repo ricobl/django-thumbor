@@ -13,10 +13,6 @@ django-thumbor
     :target: https://crate.io/packages/django-thumbor/
     :alt: Number of downloads for django-thumbor on PyPI
 
-.. image:: https://codeq.io/github/ricobl/django-thumbor/badges/master.png
-    :target: https://codeq.io/github/ricobl/django-thumbor/branches/master
-    :alt: Quality score on Codeq
-
 .. image:: https://coveralls.io/repos/ricobl/django-thumbor/badge.png?branch=master
     :target: https://coveralls.io/r/ricobl/django-thumbor?branch=master
     :alt: Code coverage on Coveralls
