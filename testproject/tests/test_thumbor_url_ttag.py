@@ -20,6 +20,11 @@ class TestThumborURLTTagMock(TestCase):
             self.render('url')
             mock.assert_called_with(image_url=self.url)
 
+    def test_should_pass_the_endpoint_arg_to_the_helper(self):
+        with patch(self.generate_url_path) as mock:
+            self.render('url endpoint="/foo"')
+            mock.assert_called_with(image_url=self.url, endpoint='/foo')
+
     def test_should_pass_kwargs_to_the_helper(self):
         with patch(self.generate_url_path) as mock:
             self.render('url width=300 height=200')

@@ -41,6 +41,17 @@ class TestGenerateURL(TestCase):
 
         self.assertEqual(url, encrypted_url_with_host)
 
+    def test_should_return_the_result_whith_endpoint(self):
+        encrypted_url = 'encrypted-url.jpg'
+        encrypted_url_with_host = 'http://localhost:8888/foo/encrypted-url.jpg'
+        endpoint = '/foo'
+
+        with patch('django_thumbor.crypto.generate') as mock:
+            mock.return_value = encrypted_url
+            url = generate_url(self.url, endpoint=endpoint)
+
+        self.assertEqual(url, encrypted_url_with_host)
+
     @override_settings(THUMBOR_ARGUMENTS={'smart': True, 'fit_in': True})
     def test_should_pass_args_from_settings_to_crypto(self):
         reload(conf)
