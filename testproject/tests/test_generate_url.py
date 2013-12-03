@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import imp
 from mock import patch
 from unittest import TestCase
 from django.test.utils import override_settings
@@ -12,7 +13,7 @@ class TestGenerateURL(TestCase):
 
     def tearDown(self):
         # Restore changed settings
-        reload(conf)
+        imp.reload(conf)
 
     def assertPassesArgsToCrypto(self, *args, **kwargs):
         with patch('django_thumbor.crypto.generate') as mock:
@@ -67,7 +68,7 @@ class TestGenerateURL(TestCase):
 
     @override_settings(THUMBOR_ARGUMENTS={'smart': True, 'fit_in': True})
     def test_should_pass_args_from_settings_to_crypto(self):
-        reload(conf)
+        imp.reload(conf)
         with patch('django_thumbor.crypto.generate') as mock:
             generate_url(image_url=self.url)
             mock.assert_called_with(
@@ -75,7 +76,7 @@ class TestGenerateURL(TestCase):
 
     @override_settings(THUMBOR_ARGUMENTS={'smart': True})
     def test_should_allow_overriding_args_from_settings(self):
-        reload(conf)
+        imp.reload(conf)
         with patch('django_thumbor.crypto.generate') as mock:
             generate_url(image_url=self.url, smart=False)
             mock.assert_called_with(image_url=self.url, smart=False)
