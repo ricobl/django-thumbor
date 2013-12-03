@@ -42,6 +42,22 @@ On code:
     from django_thumbor import generate_url
     resized = generate_url("/media/image.jpg", width=300)
 
+There is an extra parameter to specify an endpoint to be appended to your ``settings.THUMBOR_SERVER``.
+
+On templates:
+
+.. code-block:: html
+
+    {% load thumbor_tags %}
+    <img src="{% thumbor_url '/media/image.jpg' '/foo' width=300 %}" width="300" />
+
+On code:
+
+.. code-block:: python
+
+    from django_thumbor import generate_url
+    resized = generate_url("/media/image.jpg", endpoint='/foo', width=300)
+
 
 Installation
 ------------
