@@ -26,11 +26,14 @@ def _prepend_media_url(url):
     return url
 
 
-def generate_url(image_url, endpoint='', **kwargs):
+def generate_url(image_url, **kwargs):
     image_url = _prepend_media_url(image_url)
     image_url = _remove_schema(image_url)
 
     kwargs = dict(conf.THUMBOR_ARGUMENTS, **kwargs)
+    thumbor_server = kwargs.pop(
+        'thumbor_server', conf.THUMBOR_SERVER).rstrip('/')
+
     encrypted_url = crypto.generate(image_url=image_url, **kwargs).strip('/')
 
-    return '%s%s/%s' % (conf.THUMBOR_SERVER, endpoint, encrypted_url)
+    return '%s/%s' % (thumbor_server, encrypted_url)

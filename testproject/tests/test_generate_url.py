@@ -41,14 +41,27 @@ class TestGenerateURL(TestCase):
 
         self.assertEqual(url, encrypted_url_with_host)
 
-    def test_should_return_the_result_whith_endpoint(self):
+    def test_should_return_the_result_with_a_custom_server(self):
         encrypted_url = 'encrypted-url.jpg'
-        encrypted_url_with_host = 'http://localhost:8888/foo/encrypted-url.jpg'
-        endpoint = '/foo'
+        custom_server = 'http://localhost:8888/foo'
+        encrypted_url_with_host = '{0}/{1}'.format(
+            custom_server, encrypted_url)
 
         with patch('django_thumbor.crypto.generate') as mock:
             mock.return_value = encrypted_url
-            url = generate_url(self.url, endpoint=endpoint)
+            url = generate_url(self.url, thumbor_server=custom_server)
+
+        self.assertEqual(url, encrypted_url_with_host)
+
+    def test_should_remove_ending_slash_from_custom_server(self):
+        encrypted_url = 'encrypted-url.jpg'
+        custom_server = 'http://localhost:8888/foo/'
+        encrypted_url_with_host = '{0}{1}'.format(
+            custom_server, encrypted_url)
+
+        with patch('django_thumbor.crypto.generate') as mock:
+            mock.return_value = encrypted_url
+            url = generate_url(self.url, thumbor_server=custom_server)
 
         self.assertEqual(url, encrypted_url_with_host)
 
@@ -70,9 +83,9 @@ class TestGenerateURL(TestCase):
 
 class TestURLFixing(TestCase):
 
-    def assertURLEquals(self, original, expected):
+    def assertURLEquals(self, original, expected, **kwargs):
         with patch('django_thumbor.crypto.generate') as mock:
-            generate_url(original)
+            generate_url(original, **kwargs)
             mock.assert_called_with(image_url=expected)
 
     def test_should_prepend_the_domain_to_media_url_images(self):

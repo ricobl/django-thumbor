@@ -7,5 +7,5 @@ register = template.Library()
 
 
 @register.simple_tag
-def thumbor_url(image_url, endpoint='', **kwargs):
-    return generate_url(image_url=image_url, endpoint=endpoint, **kwargs)
+def thumbor_url(image_url, **kwargs):
+    return generate_url(image_url=image_url, **kwargs)

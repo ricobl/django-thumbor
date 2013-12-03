@@ -42,21 +42,24 @@ On code:
     from django_thumbor import generate_url
     resized = generate_url("/media/image.jpg", width=300)
 
-There is an extra parameter to specify an endpoint to be appended to your ``settings.THUMBOR_SERVER``.
+There is an extra parameter to specify a custom server to be used instead of
+``settings.THUMBOR_SERVER``.
 
 On templates:
 
 .. code-block:: html
 
     {% load thumbor_tags %}
-    <img src="{% thumbor_url '/media/image.jpg' '/foo' width=300 %}" width="300" />
+    <img src="{% thumbor_url '/media/image.jpg' thumbor_server='http://localhost:8888/foo' width=300 %}" width="300" />
 
 On code:
 
 .. code-block:: python
 
     from django_thumbor import generate_url
-    resized = generate_url("/media/image.jpg", endpoint='/foo', width=300)
+    custom_server = "http://localhost:8888/foo"
+    resized = generate_url(
+        "/media/image.jpg", thumbor_server=custom_server, width=300)
 
 
 Installation
