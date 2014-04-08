@@ -31,3 +31,11 @@ class TestThumborURLTTagMock(TestCase):
         with patch(self.generate_url_path) as mock:
             self.render('url width=300 height=200')
             mock.assert_called_with(image_url=self.url, width=300, height=200)
+
+    def test_should_convert_colon_separated_filters_to_a_list(self):
+        filters = [
+            u'watermark(http://domain.com/images/watermark.png,-10,-10,20)',
+            u'brightness(10)']
+        with patch(self.generate_url_path) as mock:
+            self.render('url filters="{0}"'.format(':'.join(filters)))
+            mock.assert_called_with(image_url=self.url, filters=filters)
