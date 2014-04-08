@@ -35,6 +35,15 @@ On templates:
     {% load thumbor_tags %}
     <img src="{% thumbor_url '/media/image.jpg' width=300 %}" width="300" />
 
+Split `filters <https://github.com/thumbor/thumbor/wiki/Filters>`_ with
+``:`` (or use a ``list`` object):
+
+.. code-block:: html
+
+    {% load thumbor_tags %}
+    <img src="{% thumbor_url url filters='watermark(http://domain.com/watermark.png,-10,-10,20):brightness(10)' %}" />
+    <img src="{% thumbor_url url filters=filter_list %}" />
+
 On code:
 
 .. code-block:: python
