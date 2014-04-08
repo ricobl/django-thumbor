@@ -6,11 +6,11 @@ django-thumbor
     :alt: CI status on Travis CI
 
 .. image:: https://pypip.in/v/django-thumbor/badge.png
-    :target: https://crate.io/packages/django-thumbor/
+    :target: https://pypi.python.org/pypi/django-thumbor/
     :alt: Latest django-thumbor PyPI version
 
 .. image:: https://pypip.in/d/django-thumbor/badge.png
-    :target: https://crate.io/packages/django-thumbor/
+    :target: https://pypi.python.org/pypi/django-thumbor/
     :alt: Number of downloads for django-thumbor on PyPI
 
 .. image:: https://coveralls.io/repos/ricobl/django-thumbor/badge.png?branch=master
