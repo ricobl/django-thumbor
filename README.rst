@@ -17,6 +17,10 @@ django-thumbor
     :target: https://coveralls.io/r/ricobl/django-thumbor?branch=master
     :alt: Code coverage on Coveralls
 
+.. image:: https://gemnasium.com/ricobl/django-thumbor.svg
+    :target: https://gemnasium.com/ricobl/django-thumbor
+    :alt: Dependency Status on Gemnasium
+
 
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
