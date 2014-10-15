@@ -56,6 +56,5 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
     '--nocapture',
     '--nologcapture',
-    '--rednose',
     '--verbosity', '2',
 ]
