@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
@@ -12,6 +11,12 @@ setup(
     author=u'Enrico Batista da Luz',
     author_email='rico.bl@gmail.com',
     url='http://github.com/ricobl/django-thumbor/',
+    license=(
+        'django-thumbor is licensed under the MIT license. '
+        'For more information, please see LICENSE file.'),
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+    ],
     packages=[
         'django_thumbor',
         'django_thumbor.templatetags',
