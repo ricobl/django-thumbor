@@ -5,11 +5,11 @@ django-thumbor
     :target: https://travis-ci.org/ricobl/django-thumbor
     :alt: CI status on Travis CI
 
-.. image:: https://pypip.in/v/django-thumbor/badge.png
+.. image:: http://img.shields.io/pypi/v/django-thumbor.svg
     :target: https://pypi.python.org/pypi/django-thumbor/
     :alt: Latest django-thumbor PyPI version
 
-.. image:: https://pypip.in/d/django-thumbor/badge.png
+.. image:: https://img.shields.io/pypi/dm/django-thumbor.svg
     :target: https://pypi.python.org/pypi/django-thumbor/
     :alt: Number of downloads for django-thumbor on PyPI
 
