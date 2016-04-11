@@ -93,6 +93,10 @@ class TestURLFixing(TestCase):
         self.assertURLEquals('/media/uploads/image.jpg',
                              'localhost:8000/media/uploads/image.jpg')
 
+    @override_settings(MEDIA_URL="")
+    def test_should_not_prepend_media_url_if_none_is_set(self):
+        self.assertURLEquals('http://www.domain.com/media/uploads/image.jpg', 'www.domain.com/media/uploads/image.jpg')
+
     def test_should_remove_the_scheme_from_external_images(self):
         self.assertURLEquals('http://some.domain.com/path/image.jpg',
                              'some.domain.com/path/image.jpg')
