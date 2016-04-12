@@ -139,9 +139,10 @@ Add tests on ``testproject/tests``, add code and run:
     make test
 
 
-Authors
--------
+Contributors
+------------
 
-@ricobl
-@avelino
-@Starou
+* @ricobl
+* @Starou
+* @avelino
+* @hakanw
