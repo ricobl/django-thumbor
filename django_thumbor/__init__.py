@@ -19,7 +19,7 @@ def _remove_schema(url):
 
 
 def _prepend_media_url(url):
-    if url.startswith(settings.MEDIA_URL):
+    if settings.MEDIA_URL and url.startswith(settings.MEDIA_URL):
         url = _remove_prefix(url, settings.MEDIA_URL)
         url.lstrip('/')
         return '%s/%s' % (conf.THUMBOR_MEDIA_URL, url)
