@@ -26,8 +26,17 @@ def _prepend_media_url(url):
     return url
 
 
+def _prepend_static_url(url):
+    if url.startswith(settings.STATIC_URL):
+        url = _remove_prefix(url, settings.STATIC_URL)
+        url.lstrip('/')
+        return '%s/%s' % (conf.THUMBOR_STATIC_URL, url)
+    return url
+
+
 def generate_url(image_url, **kwargs):
     image_url = _prepend_media_url(image_url)
+    image_url = _prepend_static_url(image_url)
     image_url = _remove_schema(image_url)
 
     kwargs = dict(conf.THUMBOR_ARGUMENTS, **kwargs)
