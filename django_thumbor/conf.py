@@ -11,6 +11,10 @@ THUMBOR_SERVER = getattr(settings, 'THUMBOR_SERVER',
 THUMBOR_MEDIA_URL = getattr(settings, 'THUMBOR_MEDIA_URL',
                             'http://localhost:8000/media').rstrip('/')
 
+
+THUMBOR_STATIC_URL = getattr(settings, 'THUMBOR_STATIC_URL',
+                            'http://localhost:8000/static').rstrip('/')
+
 # The same security key used in the thumbor service to
 # match the URL construction
 THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY',
