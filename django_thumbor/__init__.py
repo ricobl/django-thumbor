@@ -27,7 +27,7 @@ def _prepend_media_url(url):
 
 
 def _prepend_static_url(url):
-    if url.startswith(settings.STATIC_URL):
+    if conf.THUMBOR_STATIC_ENABLED and url.startswith(settings.STATIC_URL):
         url = _remove_prefix(url, settings.STATIC_URL)
         url.lstrip('/')
         return '%s/%s' % (conf.THUMBOR_STATIC_URL, url)
