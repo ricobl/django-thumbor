@@ -94,6 +94,7 @@ class TestURLFixing(TestCase):
                              'localhost:8000/media/uploads/image.jpg')
 
     def test_should_prepend_the_domain_to_static_url_images(self):
+        conf.THUMBOR_STATIC_ENABLED = True
         self.assertURLEquals('/static/uploads/image.jpg',
                              'localhost:8000/static/uploads/image.jpg')
 
@@ -101,8 +102,8 @@ class TestURLFixing(TestCase):
     def test_should_not_prepend_media_url_if_none_is_set(self):
         self.assertURLEquals('http://www.domain.com/media/uploads/image.jpg', 'www.domain.com/media/uploads/image.jpg')
 
-    @override_settings(MEDIA_URL="")
-    def test_should_not_prepend_media_url_if_none_is_set(self):
+    @override_settings(STATIC_URL="")
+    def test_should_not_prepend_static_url_if_none_is_set(self):
         self.assertURLEquals('http://www.domain.com/static/uploads/image.jpg', 'www.domain.com/static/uploads/image.jpg')
 
     def test_should_remove_the_scheme_from_external_images(self):
