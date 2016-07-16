@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from urllib2 import quote
 from libthumbor import CryptoURL
 from django_thumbor import conf
 from django.conf import settings
@@ -35,6 +36,7 @@ def _prepend_static_url(url):
 
 
 def generate_url(image_url, **kwargs):
+    image_url = quote(image_url)
     image_url = _prepend_media_url(image_url)
     image_url = _prepend_static_url(image_url)
     image_url = _remove_schema(image_url)
