@@ -1,6 +1,3 @@
-# Temporary fix for python 3
-libthumbor==1.0.1
-
 -e .
 
 django-nose
