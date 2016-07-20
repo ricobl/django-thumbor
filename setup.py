@@ -23,7 +23,7 @@ setup(
     ],
     install_requires=(
         'Django>=1.4',
-        'libthumbor',
+        'libthumbor>=1.0.1',
     ),
     tests_require=(
         'django-nose',
