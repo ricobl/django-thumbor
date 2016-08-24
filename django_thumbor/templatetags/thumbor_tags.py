@@ -33,8 +33,5 @@ def thumbor_url(image_url, **kwargs):
         return_url = image_url
     elif image_url and hasattr(image_url, "url"):
         return_url = getattr(image_url, "url", "")
-    else:
-        # Invalid url, not call generate_url()
-        return ""
 
     return generate_url(image_url=return_url, **kwargs)

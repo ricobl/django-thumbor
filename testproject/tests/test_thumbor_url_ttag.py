@@ -5,9 +5,16 @@ from unittest import TestCase
 from django.template import Template, Context
 
 
+URL = 'domain.com/path/image.jpg'
+
+class MockImageField():
+    @property
+    def url(self):
+        return URL
+
 @patch('django_thumbor.templatetags.thumbor_tags.generate_url')
 class TestThumborURLTTagMock(TestCase):
-    url = 'domain.com/path/image.jpg'
+    url = URL
     generate_url_path = 'django_thumbor.templatetags.thumbor_tags.generate_url'
 
     def render(self, arguments, context=None):
@@ -20,6 +27,15 @@ class TestThumborURLTTagMock(TestCase):
 
     def test_should_pass_the_image_url_arg_to_the_helper(self, generate_url):
         self.render('url')
+        generate_url.assert_called_with(image_url=self.url)
+
+    def test_should_pass_the_empty_image_url(self, generate_url):
+        self.render('image_url=""')
+        generate_url.assert_called_with(image_url="")
+
+    def test_should_pass_the_image_with_url_param(self, generate_url):
+        context = {"image": MockImageField()}
+        self.render(arguments='image', context=context)
         generate_url.assert_called_with(image_url=self.url)
 
     def test_should_pass_the_custom_server_arg_to_the_helper(self, generate_url):
