@@ -39,6 +39,11 @@ On templates:
     {% load thumbor_tags %}
     <img src="{% thumbor_url '/media/image.jpg' width=300 %}" width="300" />
 
+    or
+
+    {% load thumbor_tags %}
+    <img src="{% thumbor_url model.image_field width=300 %}" width="300" />
+
 Split `filters <https://github.com/thumbor/thumbor/wiki/Filters>`_ with
 ``:`` (or use a ``list`` object):
 
