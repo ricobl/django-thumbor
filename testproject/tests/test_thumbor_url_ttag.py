@@ -33,11 +33,6 @@ class TestThumborURLTTagMock(TestCase):
         self.render('image_url=""')
         generate_url.assert_called_with(image_url="")
 
-    def test_should_pass_the_image_with_url_param(self, generate_url):
-        context = {"image": MockImageField()}
-        self.render(arguments='image', context=context)
-        generate_url.assert_called_with(image_url=self.url)
-
     def test_should_pass_the_custom_server_arg_to_the_helper(self, generate_url):
         custom_server = "http://localhost:8888/foo"
         self.render('url thumbor_server="{0}"'.format(custom_server))
