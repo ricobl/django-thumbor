@@ -5,16 +5,9 @@ from unittest import TestCase
 from django.template import Template, Context
 
 
-URL = 'domain.com/path/image.jpg'
-
-class MockImageField():
-    @property
-    def url(self):
-        return URL
-
 @patch('django_thumbor.templatetags.thumbor_tags.generate_url')
 class TestThumborURLTTagMock(TestCase):
-    url = URL
+    url = 'domain.com/path/image.jpg'
     generate_url_path = 'django_thumbor.templatetags.thumbor_tags.generate_url'
 
     def render(self, arguments, context=None):
