@@ -7,10 +7,15 @@ from django.test.utils import override_settings
 from django_thumbor import generate_url, conf
 
 
+URL = 'domain.com/path/image.jpg'
+
+class MockImageField():
+    @property
+    def url(self):
+        return URL
+
+
 class TestGenerateURL(TestCase):
-
-    url = 'domain.com/path/image.jpg'
-
     def tearDown(self):
         # Restore changed settings
         imp.reload(conf)
@@ -22,15 +27,15 @@ class TestGenerateURL(TestCase):
 
     def test_should_pass_url_arg_to_crypto(self):
         with patch('django_thumbor.crypto.generate') as mock:
-            generate_url(self.url)
-            mock.assert_called_with(image_url=self.url)
+            generate_url(URL)
+            mock.assert_called_with(image_url=URL)
 
     def test_should_pass_url_kwarg_to_crypto(self):
-        self.assertPassesArgsToCrypto(image_url=self.url)
+        self.assertPassesArgsToCrypto(image_url=URL)
 
     def test_should_pass_extra_kwargs_to_crypto(self):
         self.assertPassesArgsToCrypto(
-            image_url=self.url, width=300, height=200)
+            image_url=URL, width=300, height=200)
 
     def test_should_return_the_result(self):
         encrypted_url = 'encrypted-url.jpg'
@@ -38,7 +43,7 @@ class TestGenerateURL(TestCase):
 
         with patch('django_thumbor.crypto.generate') as mock:
             mock.return_value = encrypted_url
-            url = generate_url(self.url)
+            url = generate_url(URL)
 
         self.assertEqual(url, encrypted_url_with_host)
 
@@ -50,7 +55,32 @@ class TestGenerateURL(TestCase):
 
         with patch('django_thumbor.crypto.generate') as mock:
             mock.return_value = encrypted_url
-            url = generate_url(self.url, thumbor_server=custom_server)
+            url = generate_url(URL, thumbor_server=custom_server)
+
+        self.assertEqual(url, encrypted_url_with_host)
+
+    def test_should_pass_the_image_with_url_param(self):
+        image_mock = MockImageField()
+        encrypted_url = image_mock.url
+        custom_server = 'http://localhost:8888/foo'
+        encrypted_url_with_host = '{0}/{1}'.format(
+            custom_server, encrypted_url)
+
+        with patch('django_thumbor.crypto.generate') as mock:
+            mock.return_value = image_mock.url
+            url = generate_url(image_mock, thumbor_server=custom_server)
+
+        self.assertEqual(url, encrypted_url_with_host)
+
+    def test_should_pass_empty_url(self):
+        encrypted_url = ""
+        custom_server = 'http://localhost:8888/foo'
+        encrypted_url_with_host = '{0}/{1}'.format(
+            custom_server, encrypted_url)
+
+        with patch('django_thumbor.crypto.generate') as mock:
+            mock.return_value = ""
+            url = generate_url(mock.return_value, thumbor_server=custom_server)
 
         self.assertEqual(url, encrypted_url_with_host)
 
@@ -62,7 +92,7 @@ class TestGenerateURL(TestCase):
 
         with patch('django_thumbor.crypto.generate') as mock:
             mock.return_value = encrypted_url
-            url = generate_url(self.url, thumbor_server=custom_server)
+            url = generate_url(URL, thumbor_server=custom_server)
 
         self.assertEqual(url, encrypted_url_with_host)
 
@@ -70,16 +100,16 @@ class TestGenerateURL(TestCase):
     def test_should_pass_args_from_settings_to_crypto(self):
         imp.reload(conf)
         with patch('django_thumbor.crypto.generate') as mock:
-            generate_url(image_url=self.url)
+            generate_url(image_url=URL)
             mock.assert_called_with(
-                image_url=self.url, smart=True, fit_in=True)
+                image_url=URL, smart=True, fit_in=True)
 
     @override_settings(THUMBOR_ARGUMENTS={'smart': True})
     def test_should_allow_overriding_args_from_settings(self):
         imp.reload(conf)
         with patch('django_thumbor.crypto.generate') as mock:
-            generate_url(image_url=self.url, smart=False)
-            mock.assert_called_with(image_url=self.url, smart=False)
+            generate_url(image_url=URL, smart=False)
+            mock.assert_called_with(image_url=URL, smart=False)
 
 
 class TestURLFixing(TestCase):

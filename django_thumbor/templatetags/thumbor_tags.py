@@ -25,4 +25,5 @@ def thumbor_url(image_url, **kwargs):
     filters = kwargs.get('filters')
     if filters and isinstance(filters, STRING_TYPES):
         kwargs['filters'] = _parse_filters(filters)
+
     return generate_url(image_url=image_url, **kwargs)

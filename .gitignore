@@ -5,3 +5,4 @@
 dist/
 django_thumbor.egg-info/
 docs/_build
+build/

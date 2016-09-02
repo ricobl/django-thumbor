@@ -3,6 +3,8 @@
 from libthumbor import CryptoURL
 from django_thumbor import conf
 from django.conf import settings
+import logging
+logger = logging.getLogger(__name__)
 
 
 crypto = CryptoURL(key=conf.THUMBOR_SECURITY_KEY)
@@ -34,7 +36,23 @@ def _prepend_static_url(url):
     return url
 
 
+# Deny empty or none url
+def _handle_empty(url):
+    if not url:
+        logger.error("Empty URL. Skipping.")
+        return ""
+    return url
+
+# Accept string url and ImageField or similars classes
+# with "url" attr as param
+def _handle_url_field(url):
+    if hasattr(url, "url"):
+        return getattr(url, "url", "")
+    return url
+
 def generate_url(image_url, **kwargs):
+    image_url = _handle_empty(image_url)
+    image_url = _handle_url_field(image_url)
     image_url = _prepend_media_url(image_url)
     image_url = _prepend_static_url(image_url)
     image_url = _remove_schema(image_url)
