@@ -6,4 +6,4 @@ test: clean
 install:
 	@pip install -r dev_requirements.txt
 release: clean
-	@python setup.py -q sdist upload -r pyorg
+	@python setup.py -q sdist upload
