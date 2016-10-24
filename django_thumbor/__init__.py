@@ -50,17 +50,32 @@ def _handle_url_field(url):
         return getattr(url, "url", "")
     return url
 
-def generate_url(image_url, **kwargs):
+def generate_url(image_url, alias=None, **kwargs):
     image_url = _handle_empty(image_url)
     image_url = _handle_url_field(image_url)
     image_url = _prepend_media_url(image_url)
     image_url = _prepend_static_url(image_url)
     image_url = _remove_schema(image_url)
 
-    kwargs = dict(conf.THUMBOR_ARGUMENTS, **kwargs)
-    thumbor_server = kwargs.pop(
+    if alias:
+        if alias not in conf.THUMBOR_ALIASES:
+            raise RuntimeError(
+                'Alias "{}" not found in alias map THUMBOR_ALIASES. '
+                'only found these: {}'
+                .format(alias, ", ".join(conf.THUMBOR_ALIASES.keys())))
+        alias_args = conf.THUMBOR_ALIASES[alias]
+    else:
+        alias_args = {}
+
+    final_args = dict(conf.THUMBOR_ARGUMENTS)
+    final_args.update(alias_args)
+    final_args.update(kwargs)
+
+    thumbor_server = final_args.pop(
         'thumbor_server', conf.THUMBOR_SERVER).rstrip('/')
 
-    encrypted_url = crypto.generate(image_url=image_url, **kwargs).strip('/')
+    encrypted_url = crypto.generate(
+        image_url=image_url,
+        **final_args).strip('/')
 
     return '%s/%s' % (thumbor_server, encrypted_url)

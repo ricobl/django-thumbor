@@ -22,3 +22,8 @@ THUMBOR_SECURITY_KEY = getattr(settings, 'THUMBOR_SECURITY_KEY',
                                'MY_SECURE_KEY')
 
 THUMBOR_ARGUMENTS = getattr(settings, 'THUMBOR_ARGUMENTS', {})
+
+# An alias represents a named set of arguments which may be passed to
+# the url generating function instead of the arguments. Allows re-use
+# of thumbnail types across the app.
+THUMBOR_ALIASES = getattr(settings, 'THUMBOR_ALIASES', {})

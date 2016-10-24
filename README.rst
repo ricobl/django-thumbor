@@ -44,6 +44,8 @@ On templates:
     {% load thumbor_tags %}
     <img src="{% thumbor_url model.image_field width=300 %}" width="300" />
 
+### Filters
+
 Split `filters <https://github.com/thumbor/thumbor/wiki/Filters>`_ with
 ``:`` (or use a ``list`` object):
 
@@ -59,6 +61,32 @@ On code:
 
     from django_thumbor import generate_url
     resized = generate_url("/media/image.jpg", width=300)
+
+
+### Re-using argument sets (aliases)
+
+You can re-use argument sets through globally defined aliases. This prevents
+repeating thumbnail parameters all over the code and can improve thumbor
+performance because thumbnails are re-used as well. If you're migrating
+from django-easy-thumbnails, you'll find the pattern very familiar, and it
+should make porting much more straight-forward.
+
+On templates:
+
+.. code-block:: html
+
+    {% load thumbor_tags %}
+    <img src="{% thumbor_url '/media/image.jpg' alias="thumb-square" %}" />
+
+On code:
+
+.. code-block:: python
+
+    from django_thumbor import generate_url
+    resized = generate_url("/media/image.jpg", alias="thumb-square")
+
+
+### Override server address
 
 There is an extra parameter to specify a custom server to be used instead of
 ``settings.THUMBOR_SERVER``.
@@ -126,6 +154,16 @@ Here are the default settings that you can override:
     # Default arguments passed to the `generate_url` helper or
     # the `thumbor_url` templatetag
     THUMBOR_ARGUMENTS = {}
+
+    # An alias represents a named set of arguments to the generate_url function
+    # or thumbor_url template tag. Use it to share general thumbnail
+    # configurations without repeating yourself.
+    THUMBOR_ALIASES = {
+        # 'thumb-square': {
+        #     'width': 300,
+        #     'height': 300,
+        #     'filters': ['brightness(10)']}
+    }
 
 
 Contributing

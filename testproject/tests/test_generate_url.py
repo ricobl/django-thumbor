@@ -8,6 +8,13 @@ from django_thumbor import generate_url, conf
 
 
 URL = 'domain.com/path/image.jpg'
+ALIASES = {
+    'thumb-square': {
+        'width': 300,
+        'height': 300,
+        'filters': ['brightness(10)']}
+}
+
 
 class MockImageField():
     @property
@@ -110,6 +117,15 @@ class TestGenerateURL(TestCase):
         with patch('django_thumbor.crypto.generate') as mock:
             generate_url(image_url=URL, smart=False)
             mock.assert_called_with(image_url=URL, smart=False)
+
+    @override_settings(THUMBOR_ALIASES=ALIASES)
+    def test_should_apply_alias(self):
+        imp.reload(conf)
+        with patch('django_thumbor.crypto.generate') as mock:
+            generate_url(image_url=URL, alias='thumb-square')
+            mock.assert_called_with(
+                image_url=URL, width=300, height=300,
+                filters=['brightness(10)'])
 
 
 class TestURLFixing(TestCase):
