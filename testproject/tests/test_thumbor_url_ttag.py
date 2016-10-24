@@ -55,16 +55,3 @@ class TestThumborURLTTagMock(TestCase):
     def test_should_pass_alias_through(self, generate_url):
         self.render("url alias='thumb-square'")
         generate_url.assert_called_with(image_url=self.url, alias="thumb-square")
-
-    def test_assign_tag_assigns_to_variable(self, generate_url):
-        GENERATED_URL = "generated_url"
-        generate_url.return_value = GENERATED_URL
-        source = '''
-            {% load thumbor_tags %}
-            {% assign_thumbor_url image_url=url as thumb_url %}
-            <<{{ thumb_url }}>>'''
-
-        template = Template(source)
-        context = dict({'url': self.url})
-        rendered = template.render(Context(context)).strip()
-        self.assertEqual(rendered, '<<{}>>'.format(GENERATED_URL))
