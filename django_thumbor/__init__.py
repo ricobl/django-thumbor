@@ -61,7 +61,7 @@ def generate_url(image_url, alias=None, **kwargs):
         if alias not in conf.THUMBOR_ALIASES:
             raise RuntimeError(
                 'Alias "{}" not found in alias map THUMBOR_ALIASES. '
-                'only found these: {}'
+                'Only found these: {}'
                 .format(alias, ", ".join(conf.THUMBOR_ALIASES.keys())))
         alias_args = conf.THUMBOR_ALIASES[alias]
     else:
