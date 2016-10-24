@@ -44,6 +44,8 @@ On templates:
     {% load thumbor_tags %}
     <img src="{% thumbor_url model.image_field width=300 %}" width="300" />
 
+______
+
 **Filters**
 
 Split `filters <https://github.com/thumbor/thumbor/wiki/Filters>`_ with
@@ -62,6 +64,7 @@ On code:
     from django_thumbor import generate_url
     resized = generate_url("/media/image.jpg", width=300)
 
+______
 
 **Re-using argument sets (aliases)**
 
@@ -85,6 +88,7 @@ On code:
     from django_thumbor import generate_url
     resized = generate_url("/media/image.jpg", alias="thumb-square")
 
+______
 
 **Override server address**
 
