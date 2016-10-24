@@ -44,7 +44,8 @@ On templates:
     {% load thumbor_tags %}
     <img src="{% thumbor_url model.image_field width=300 %}" width="300" />
 
-### Filters
+Filters
+^^^^^^^
 
 Split `filters <https://github.com/thumbor/thumbor/wiki/Filters>`_ with
 ``:`` (or use a ``list`` object):
@@ -63,7 +64,8 @@ On code:
     resized = generate_url("/media/image.jpg", width=300)
 
 
-### Re-using argument sets (aliases)
+Re-using argument sets (aliases)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can re-use argument sets through globally defined aliases. This prevents
 repeating thumbnail parameters all over the code and can improve thumbor
@@ -86,7 +88,8 @@ On code:
     resized = generate_url("/media/image.jpg", alias="thumb-square")
 
 
-### Override server address
+Override server address
+^^^^^^^^^^^^^^^^^^^^^^^
 
 There is an extra parameter to specify a custom server to be used instead of
 ``settings.THUMBOR_SERVER``.
