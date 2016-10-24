@@ -86,6 +86,17 @@ On code:
     from django_thumbor import generate_url
     resized = generate_url("/media/image.jpg", alias="thumb-square")
 
+And in your ``settings.py``:
+
+.. code-block:: python
+
+    THUMBOR_ALIASES = {
+        'thumb-square': {
+            'width': 300,
+            'height': 300,
+            'filters': ['brightness(10)']}
+    }
+
 
 **Override server address**
 
@@ -159,12 +170,7 @@ Here are the default settings that you can override:
     # An alias represents a named set of arguments to the generate_url function
     # or thumbor_url template tag. Use it to share general thumbnail
     # configurations without repeating yourself.
-    THUMBOR_ALIASES = {
-        # 'thumb-square': {
-        #     'width': 300,
-        #     'height': 300,
-        #     'filters': ['brightness(10)']}
-    }
+    THUMBOR_ALIASES = {}
 
 
 Contributing
