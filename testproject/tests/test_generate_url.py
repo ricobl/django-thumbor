@@ -127,6 +127,11 @@ class TestGenerateURL(TestCase):
                 image_url=URL, width=300, height=300,
                 filters=['brightness(10)'])
 
+    def test_should_raise_with_nonexistent_alias(self):
+        imp.reload(conf)
+        with self.assertRaises(RuntimeError):
+            generate_url(image_url=URL, alias='thumb-square')
+
 
 class TestURLFixing(TestCase):
 
