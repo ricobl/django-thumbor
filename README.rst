@@ -200,13 +200,3 @@ Add tests on ``testproject/tests``, add code and run:
 .. code-block:: bash
 
     make test
-
-
-Contributors
-------------
-
-* @ricobl
-* @Starou
-* @avelino
-* @hakanw
-* @pythdasch

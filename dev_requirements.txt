@@ -1,6 +1,7 @@
 -e .
 
-django-nose
-mock
+bumpversion
 coverage
 coveralls
+django-nose
+mock
