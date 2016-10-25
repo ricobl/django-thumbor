@@ -27,3 +27,12 @@ def thumbor_url(image_url, **kwargs):
         kwargs['filters'] = _parse_filters(filters)
 
     return generate_url(image_url=image_url, **kwargs)
+
+@register.assignment_tag()
+def assign_thumbor_url(image_url, **kwargs):
+    """
+    Allows assigning the generated url to a template variable.
+
+    {% assign_thumbor_url image_url="/test/pic.jpg" width=300 as thumbnail %}
+    """
+    return thumbor_url(image_url=image_url, **kwargs)

@@ -55,4 +55,3 @@ class TestThumborURLTTagMock(TestCase):
     def test_should_pass_alias_through(self, generate_url):
         self.render("url alias='thumb-square'")
         generate_url.assert_called_with(image_url=self.url, alias="thumb-square")
-
