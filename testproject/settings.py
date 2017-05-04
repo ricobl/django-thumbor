@@ -33,11 +33,19 @@ STATICFILES_FINDERS = (
 
 SECRET_KEY = 'qtn(i0@70^3%pvc-^c6!tuq_d=norv1t_*urp3dqc$%1-ci5y*'
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
+TEMPLATES = [
+    {
+        # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
+        'OPTIONS': {
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+        },
+    },
+]
 MIDDLEWARE_CLASSES = (
 )
 
@@ -58,3 +66,5 @@ NOSE_ARGS = [
     '--nologcapture',
     '--verbosity', '2',
 ]
+
+THUMBOR_STATIC_URL = "http://localhost:8000/static"

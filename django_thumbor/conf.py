@@ -11,7 +11,7 @@ THUMBOR_SERVER = getattr(settings, 'THUMBOR_SERVER',
 THUMBOR_MEDIA_URL = getattr(settings, 'THUMBOR_MEDIA_URL',
                             'http://localhost:8000/media').rstrip('/')
 
-THUMBOR_STATIC_ENABLED = False
+THUMBOR_STATIC_ENABLED = getattr(settings, 'THUMBOR_STATIC_ENABLED', False)
 
 THUMBOR_STATIC_URL = getattr(settings, 'THUMBOR_STATIC_URL',
                             'http://localhost:8000/static').rstrip('/')
