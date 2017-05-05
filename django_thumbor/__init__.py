@@ -32,7 +32,7 @@ def _prepend_static_url(url):
     if conf.THUMBOR_STATIC_ENABLED and url.startswith(settings.STATIC_URL):
         url = _remove_prefix(url, settings.STATIC_URL)
         url.lstrip('/')
-        return '%s/%s' % (settings.THUMBOR_STATIC_URL, url)
+        return '%s/%s' % (conf.THUMBOR_STATIC_URL, url)
     return url
 
 
