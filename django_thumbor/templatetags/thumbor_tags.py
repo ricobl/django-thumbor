@@ -12,6 +12,10 @@ except:
     # Python 3
     STRING_TYPES = (str,)
 
+# Django 2.0 removed support for assignment_tag
+has_assignment_tag = hasattr(register, 'assignment_tag')
+assignment_tag = has_assignment_tag and register.assignment_tag() or register.simple_tag
+
 def _parse_filters(filters):
     # Forces an empty filter to the end of the list
     filters += ':'
@@ -28,7 +32,7 @@ def thumbor_url(image_url, **kwargs):
 
     return generate_url(image_url=image_url, **kwargs)
 
-@register.assignment_tag()
+@assignment_tag
 def assign_thumbor_url(image_url, **kwargs):
     """
     Allows assigning the generated url to a template variable.
