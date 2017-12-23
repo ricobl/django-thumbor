@@ -32,9 +32,19 @@ Both ``thumbor_url`` templatetag and the ``generate_url`` helper uses the same
 arguments as `libthumbor <https://github.com/heynemann/libthumbor>`_, you can
 check the `wiki <https://github.com/heynemann/libthumbor/wiki>`_ for more info.
 
+You can pass an absolute URL, protocol relative URL (which Thumbor will attempt
+to load over HTTP), a path relative URL (beginning with `/`, which will be
+prefixed with the value of `THUMBOR_ROOT_URL`), or a name to be used with the
+default storage class.
+
 On templates:
 
 .. code-block:: html
+
+    {% load thumbor_tags %}
+    <img src="{% thumbor_url 'image.jpg' width=300 %}" width="300" />
+
+    or
 
     {% load thumbor_tags %}
     <img src="{% thumbor_url '/media/image.jpg' width=300 %}" width="300" />
@@ -42,13 +52,45 @@ On templates:
     or
 
     {% load thumbor_tags %}
+    <img src="{% thumbor_url '//example.com/media/image.jpg' width=300 %}" width="300" />
+
+    or
+
+    {% load thumbor_tags %}
+    <img src="{% thumbor_url 'http://example.com/media/image.jpg' width=300 %}" width="300" />
+
+    or
+
+    {% load thumbor_tags %}
     <img src="{% thumbor_url model.image_field width=300 %}" width="300" />
 
-If you need the result in a template variable, use `assign_thumbor_url` instead.
+If you need a thumbnail for a static file:
+
+.. code-block:: html
+
+    {% load thumbor_tags %}
+    <img src="{% static_thumbor_url 'image.jpg' width=300 %}" width="300" />
+
+    is equivalent to
+
+    {% load staticfiles thumbor_tags %}
+    <img src="{% static "image.jpg" as image_url %}{% thumbor_url image_url width=300 %}" width="300" />
+
+If you need the result in a template variable, use `assign_thumbor_url` or
+`assign_static_thumbor_url`, instead.
+
+.. code-block:: html
 
     {% load thumbor_tags %}
     {% assign_thumbor_url '/media/image.jpg' width=300 as thumb_url %}
     <img src="{{ thumb_url }}" width="300" />
+
+    or
+
+    {% load thumbor_tags %}
+    {% assign_static_thumbor_url 'image.jpg' width=300 as thumb_url %}
+    <img src="{{ thumb_url }}" width="300" />
+
 
 **Filters**
 
@@ -152,17 +194,10 @@ Here are the default settings that you can override:
     # The host serving the thumbor resized images
     THUMBOR_SERVER = 'http://localhost:8888'
 
-    # The prefix for the host serving the original images
-    # This must be a resolvable address to allow thumbor to reach the images
-    THUMBOR_MEDIA_URL = 'http://localhost:8000/media'
-
-    # If you want the static to be handled by django thumbor
-    # default as False, set True to handle it if you host your statics
-    THUMBOR_STATIC_ENABLED = False
-
-    # The prefix for the host serving the original static images
-    # this must be a resolvable address to allow thumbor to reach the images
-    THUMBOR_STATIC_URL = 'http://localhost:8000/static'
+    # The prefix for the host serving images with relative URLs.
+    # This must be a resolvable address to allow thumbor to reach the images.
+    THUMBOR_ROOT_URL = getattr(
+        settings, 'THUMBOR_ROOT_URL', 'http://localhost:8000').rstrip('/')
 
     # The same security key used in the thumbor service to
     # match the URL construction

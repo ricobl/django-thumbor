@@ -3,7 +3,9 @@
 from libthumbor import CryptoURL
 from django_thumbor import conf
 from django.conf import settings
+from django.core.files.storage import default_storage
 import logging
+import re
 logger = logging.getLogger(__name__)
 
 
@@ -20,28 +22,38 @@ def _remove_schema(url):
     return _remove_prefix(url, 'http://')
 
 
-def _prepend_media_url(url):
-    if settings.MEDIA_URL and url.startswith(settings.MEDIA_URL):
-        url = _remove_prefix(url, settings.MEDIA_URL)
-        url.lstrip('/')
-        return '%s/%s' % (conf.THUMBOR_MEDIA_URL, url)
-    return url
-
-
-def _prepend_static_url(url):
-    if conf.THUMBOR_STATIC_ENABLED and url.startswith(settings.STATIC_URL):
-        url = _remove_prefix(url, settings.STATIC_URL)
-        url.lstrip('/')
-        return '%s/%s' % (conf.THUMBOR_STATIC_URL, url)
-    return url
-
-
 # Deny empty or none url
 def _handle_empty(url):
     if not url:
         logger.error("Empty URL. Skipping.")
         return ""
     return url
+
+
+# Ensure we always have an absolute URL that Thumbor can resolve.
+def _handle_relative(url):
+    # Assume that URLs not beginning with a forward slash or scheme are names
+    # to be used with the default storage class. We check this first, because
+    # the storage class might return a relative URL that needs further
+    # processing.
+    if not re.match(r'^(/|https?://)', url):
+        url = default_storage.url(url)
+    # Return absolute URLs as-is.
+    if re.match(r'^https?://', url):
+        return url
+    # We don't have access to a request object, so we have to assume that
+    # protocol relative URLs will be available to Thumbor over HTTP.
+    if url.startswith('//'):
+        return 'http:' + url
+    # Prefix path relative URLs with the root URL from settings. We check this
+    # after protocol relative URLs, because path relative URLs will match both
+    # tests.
+    if url.startswith('/'):
+        return '%s/%s' % (conf.THUMBOR_ROOT_URL, url.lstrip('/'))
+    assert False, (
+        'This should never happen. Something has gone wrong while handling a '
+        'relative URL.')
+
 
 # Accept string url and ImageField or similars classes
 # with "url" attr as param
@@ -50,11 +62,11 @@ def _handle_url_field(url):
         return getattr(url, "url", "")
     return url
 
+
 def generate_url(image_url, alias=None, **kwargs):
     image_url = _handle_empty(image_url)
     image_url = _handle_url_field(image_url)
-    image_url = _prepend_media_url(image_url)
-    image_url = _prepend_static_url(image_url)
+    image_url = _handle_relative(image_url)
     image_url = _remove_schema(image_url)
 
     if alias:

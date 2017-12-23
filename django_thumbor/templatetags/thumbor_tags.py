@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import template
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django_thumbor import generate_url
 
 register = template.Library()
@@ -16,6 +17,7 @@ except:
 has_assignment_tag = hasattr(register, 'assignment_tag')
 assignment_tag = has_assignment_tag and register.assignment_tag() or register.simple_tag
 
+
 def _parse_filters(filters):
     # Forces an empty filter to the end of the list
     filters += ':'
@@ -23,6 +25,7 @@ def _parse_filters(filters):
     filters = [f + ')' for f in filters.split('):')]
     # Ignores the empty filter at the end
     return filters[:-1]
+
 
 @register.simple_tag
 def thumbor_url(image_url, **kwargs):
@@ -32,6 +35,17 @@ def thumbor_url(image_url, **kwargs):
 
     return generate_url(image_url=image_url, **kwargs)
 
+
+@register.simple_tag
+def static_thumbor_url(image_url, **kwargs):
+    """
+    A convenience tag to avoid having to do
+    `{% static "FOO" as foo %}{% thumbor_url foo ... %}`.
+    """
+    image_url = staticfiles_storage.url(image_url)
+    return thumbor_url(image_url, **kwargs)
+
+
 @assignment_tag
 def assign_thumbor_url(image_url, **kwargs):
     """
@@ -40,3 +54,13 @@ def assign_thumbor_url(image_url, **kwargs):
     {% assign_thumbor_url image_url="/test/pic.jpg" width=300 as thumbnail %}
     """
     return thumbor_url(image_url=image_url, **kwargs)
+
+
+@assignment_tag
+def assign_static_thumbor_url(image_url, **kwargs):
+    """
+    A convenience tag to avoid having to do
+    `{% static "FOO" as foo %}{% assign_thumbor_url foo ... as foo %}`.
+    """
+    image_url = staticfiles_storage.url(image_url)
+    return assign_thumbor_url(image_url, **kwargs)
