@@ -177,6 +177,11 @@ Here are the default settings that you can override:
     # configurations without repeating yourself.
     THUMBOR_ALIASES = {}
 
+    # Strip `http://` prefix for prettier URLs. Thumbor's HTTP loader will
+    # add these back in, but this will break HTTP loading via the
+    # `TC_AWS_ENABLE_HTTP_LOADER=True` setting for `thumbor-community/aws`.
+    THUMBOR_STRIP_HTTP = True
+
 
 Contributing
 ------------

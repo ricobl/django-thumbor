@@ -17,7 +17,9 @@ def _remove_prefix(url, prefix):
 
 
 def _remove_schema(url):
-    return _remove_prefix(url, 'http://')
+    if conf.THUMBOR_STRIP_HTTP:
+        return _remove_prefix(url, 'http://')
+    return url
 
 
 def _prepend_media_url(url):

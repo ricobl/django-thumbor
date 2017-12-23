@@ -27,3 +27,8 @@ THUMBOR_ARGUMENTS = getattr(settings, 'THUMBOR_ARGUMENTS', {})
 # the url generating function instead of the arguments. Allows re-use
 # of thumbnail types across the app.
 THUMBOR_ALIASES = getattr(settings, 'THUMBOR_ALIASES', {})
+
+# Strip `http://` prefix for prettier URLs. Thumbor's HTTP loader will
+# add these back in, but this will break HTTP loading via the
+# `TC_AWS_ENABLE_HTTP_LOADER=True` setting for `thumbor-community/aws`.
+THUMBOR_STRIP_HTTP = getattr(settings, 'THUMBOR_STRIP_HTTP', True)
