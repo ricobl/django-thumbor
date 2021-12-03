@@ -9,7 +9,7 @@ test: clean
 	@./manage.py test
 
 install:
-	@pip install -r dev_requirements.txt
+	@pipenv install --dev
 
 patch:
 	@$(eval BUMP := 'patch')

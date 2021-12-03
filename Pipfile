@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+django-thumbor = {editable = true, path = "."}
+bumpversion = "*"
+coverage = "*"
+coveralls = "*"
+django-nose = "*"
+mock = "*"
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+test = "make test"
+coverage-test = "./manage.py test --with-coverage"

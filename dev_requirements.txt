@@ -1,7 +1,0 @@
--e .
-
-bumpversion
-coverage
-coveralls
-django-nose
-mock
