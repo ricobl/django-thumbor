@@ -40,19 +40,4 @@ jobs:
       - name: Test
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run coverage-test
-
-      - name: Coveralls
-        uses: AndreMiras/coveralls-python-action@develop
-        with:
-          parallel: true
-          flag-name: Unit Test
-
-  coveralls_finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: AndreMiras/coveralls-python-action@develop
-      with:
-        parallel-finished: true
+          command: run test
