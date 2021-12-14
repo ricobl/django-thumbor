@@ -9,7 +9,6 @@ name = "pypi"
 django-thumbor = {editable = true, path = "."}
 bumpversion = "*"
 coverage = "*"
-coveralls = "*"
 django-nose = "*"
 mock = "*"
 
