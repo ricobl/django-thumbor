@@ -27,3 +27,5 @@ THUMBOR_ARGUMENTS = getattr(settings, 'THUMBOR_ARGUMENTS', {})
 # the url generating function instead of the arguments. Allows re-use
 # of thumbnail types across the app.
 THUMBOR_ALIASES = getattr(settings, 'THUMBOR_ALIASES', {})
+
+CLEAN_STRINGS = getattr(settings, 'CLEAN_STRINGS', [])
