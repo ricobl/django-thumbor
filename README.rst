@@ -185,7 +185,8 @@ Fork, clone, create a virtualenv and run:
 .. code-block:: bash
 
     git clone git://github.com/ricobl/django-thumbor.git
-    mkvirtualenv django-thumbor
+    cd django-thumbor
+    pipenv shell
     make install
 
 Test
