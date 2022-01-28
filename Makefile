@@ -5,6 +5,9 @@ clean:
 	@find . -iname '__pycache__' -delete  # py3
 	@rm -rf dist/ django_thumbor.egg-info/
 
+run: clean
+	@./manage.py runserver
+
 test: clean
 	@./manage.py test
 

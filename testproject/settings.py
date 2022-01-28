@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-LOCAL_FILE = lambda *p: os.path.abspath(os.path.join(__file__, '../..', *p))
+LOCAL_FILE = lambda *p: os.path.abspath(os.path.join(__file__, '..', *p))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -40,7 +40,7 @@ TEMPLATE_LOADERS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [LOCAL_FILE('templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             # ... some options here ...

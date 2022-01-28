@@ -197,3 +197,11 @@ Add tests on ``testproject/tests``, add code and run:
 .. code-block:: bash
 
     make test
+
+Test Server
+...........
+
+- Instal thumbor server: ``pip install thumbor``
+- Run thumbor: ``thumbor``
+- Run local server: ``make run``
+- visit `http://127.0.0.1:8000/ <http://127.0.0.1:8000/>`_:
