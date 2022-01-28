@@ -1,0 +1,9 @@
+{% load thumbor_tags %}
+
+<p>Media:<br />
+  <img src="{% thumbor_url '/media/example.jpg' width=100 %}" />
+</p>
+
+<p>External:<br />
+  <img src="{% thumbor_url 'https://github.com/thumbor/thumbor/raw/master/example.jpg' width=100 %}" />
+</p>
