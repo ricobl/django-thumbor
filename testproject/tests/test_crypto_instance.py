@@ -9,8 +9,9 @@ from django.test.utils import override_settings
 class TestCryptoInstance(TestCase):
 
     def test_should_have_a_default_secret_key(self):
-        self.assertEqual(crypto.key, 'MY_SECURE_KEY')
-        self.assertEqual(crypto.key, conf.THUMBOR_SECURITY_KEY)
+        key = crypto.key.decode('utf-8')
+        self.assertEqual(key, 'MY_SECURE_KEY')
+        self.assertEqual(key, conf.THUMBOR_SECURITY_KEY)
 
     @override_settings(THUMBOR_SECURITY_KEY='custom-security-key')
     def test_should_read_key_from_settings(self):
