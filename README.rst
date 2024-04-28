@@ -1,18 +1,19 @@
 django-thumbor
 ==============
 
-.. image:: https://travis-ci.org/ricobl/django-thumbor.png?branch=master
-    :target: https://travis-ci.org/ricobl/django-thumbor
-    :alt: CI status on Travis CI
+.. |build| image:: https://github.com/ricobl/django-thumbor/actions/workflows/test.yml/badge.svg?branch=master
+    :target: https://github.com/ricobl/django-thumbor/actions/workflows/test.yml
+    :alt: Test Build Status
 
-.. image:: http://img.shields.io/pypi/v/django-thumbor.svg
+.. |version| image:: http://img.shields.io/pypi/v/django-thumbor.svg
     :target: https://pypi.python.org/pypi/django-thumbor/
     :alt: Latest django-thumbor PyPI version
 
-.. image:: https://img.shields.io/pypi/dm/django-thumbor.svg
+.. |downloads| image:: https://img.shields.io/pypi/dm/django-thumbor.svg
     :target: https://pypi.python.org/pypi/django-thumbor/
     :alt: Number of downloads for django-thumbor on PyPI
 
+|build| |version| |downloads|
 
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
