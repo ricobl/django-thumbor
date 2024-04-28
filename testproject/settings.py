@@ -59,12 +59,4 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'django_thumbor',
-    'django_nose',
 )
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = [
-    '--nocapture',
-    '--nologcapture',
-    '--verbosity', '2',
-]
