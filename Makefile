@@ -29,5 +29,14 @@ major:
 bump:
 	@bumpversion ${BUMP}
 
-release: clean
-	@python setup.py -q sdist upload
+setup_build:
+	@pipenv run pip install twine build
+
+build: clean
+	@pipenv run python -m build
+
+upload_test: build
+	@pipenv run twine upload -r testpypi dist/*
+
+release: build
+	@pipenv run twine upload -r django-thumbor dist/*
