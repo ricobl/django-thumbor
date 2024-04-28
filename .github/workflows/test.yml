@@ -14,8 +14,8 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.9"]
-        django-version: ["3.2", "4.0.4"]
+        python-version: ["3.10"]
+        django-version: ["3.2", "4.0.4", "5.0"]
 
     steps:
       - name: Checkout repo
@@ -31,7 +31,7 @@ jobs:
 
       - name: Install pipenv
         run: pip install --user pipenv
-        
+
       - name: Install all dependencies, including development ones
         run: pipenv sync --dev
 

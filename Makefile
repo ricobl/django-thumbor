@@ -6,10 +6,13 @@ clean:
 	@rm -rf dist/ django_thumbor.egg-info/
 
 run: clean
-	@./manage.py runserver
+	@pipenv run ./manage.py runserver
 
 test: clean
-	@./manage.py test
+	@pipenv run ./manage.py test -v 2
+
+shell: clean
+	@pipenv run ./manage.py shell
 
 install:
 	@pipenv install --dev
