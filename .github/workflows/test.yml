@@ -29,15 +29,15 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
-      - name: Install dependecies
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: install --dev
+      - name: Install pipenv
+        run: pip install --user pipenv
+        
+      - name: Install all dependencies, including development ones
+        run: pipenv sync --dev
 
       - name: Install Django
         run: pip install -q Django~=${{ matrix.django-version }}
 
       - name: Test
-        uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: run test
+          command: pipenv run test
