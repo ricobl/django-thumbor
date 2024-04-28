@@ -201,3 +201,27 @@ Test Server
 - Run thumbor: ``thumbor``
 - Run local server: ``make run``
 - visit `http://127.0.0.1:8000/ <http://127.0.0.1:8000/>`_:
+
+Releasing
+---------
+
+Refer to the `.pypirc reference <https://packaging.python.org/en/latest/specifications/pypirc/#pypirc>`_
+for details on setting up API tokens.
+
+Install ``build`` to build a package and ``twine`` to upload:
+
+.. code-block:: bash
+
+    make setup_build
+
+Upload to the `test server <https://packaging.python.org/en/latest/guides/using-testpypi/>`_:
+
+.. code-block:: bash
+
+    make upload_test
+
+If everything goes well, release to the real PyPI server:
+
+.. code-block:: bash
+
+    make release
