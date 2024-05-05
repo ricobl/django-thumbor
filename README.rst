@@ -39,6 +39,8 @@ On templates:
 
 If you need the result in a template variable, use `assign_thumbor_url` instead.
 
+.. code-block:: html
+
     {% load thumbor_tags %}
     {% assign_thumbor_url '/media/image.jpg' width=300 as thumb_url %}
     <img src="{{ thumb_url }}" width="300" />
@@ -75,7 +77,7 @@ On templates:
 .. code-block:: html
 
     {% load thumbor_tags %}
-    <img src="{% thumbor_url '/media/image.jpg' alias="thumb-square" %}" />
+    <img src="{% thumbor_url '/media/image.jpg' alias='thumb-square' %}" />
 
 On code:
 
