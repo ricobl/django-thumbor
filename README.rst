@@ -13,7 +13,11 @@ django-thumbor
     :target: https://pypi.python.org/pypi/django-thumbor/
     :alt: Number of downloads for django-thumbor on PyPI
 
-|build| |version| |downloads|
+.. |docs| image:: https://readthedocs.org/projects/django-thumbor/badge/?version=latest
+    :target: https://django-thumbor.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
+|build| |version| |downloads| |docs|
 
 A django application to resize images using the
 `thumbor <https://github.com/globocom/thumbor>`_ service.
