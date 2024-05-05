@@ -20,7 +20,7 @@ django-thumbor
 |build| |version| |downloads| |docs|
 
 A django application to resize images using the
-`thumbor <https://github.com/globocom/thumbor>`_ service.
+`thumbor <https://github.com/thumbor/thumbor>`_ service.
 
 Usage
 -----
