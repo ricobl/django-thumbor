@@ -11,8 +11,11 @@ run: clean
 test: clean
 	@pipenv run ./manage.py test -v 2
 
-shell: clean
+django_shell: clean
 	@pipenv run ./manage.py shell
+
+shell: clean
+	@pipenv shell
 
 install:
 	@pipenv install --dev
